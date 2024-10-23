@@ -14,11 +14,10 @@ def count_calls(method: Callable) -> Callable:
     """Count the number of times a page was accessed
     """
     @wraps(method)
-    def wrapper(url: str) -> str:
+    def wrapper(url):
         """Wraps the get how much times
         """
-        key = "count:{}".format(url)
-        store.incr(key)
+        store.incr(f'count:{url}')
         result = store.get(f'result:{url}')
         if result:
             return result.decode('utf-8')
@@ -26,6 +25,7 @@ def count_calls(method: Callable) -> Callable:
         result = method(url)
         store.setex(f'result:{url}', 10, result)
         return result
+
     return wrapper
 
 
