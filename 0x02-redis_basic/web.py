@@ -10,6 +10,7 @@ from typing import Callable
 store = redis.Redis()
 store.flushdb(True)
 
+
 def count_calls(method: Callable) -> Callable:
     """Count the number of times a page was accessed
     """
