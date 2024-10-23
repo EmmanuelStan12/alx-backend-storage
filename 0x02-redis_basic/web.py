@@ -8,14 +8,13 @@ from typing import Callable
 
 
 store = redis.Redis()
-store.flushdb(True)
 
 
 def count_calls(method: Callable) -> Callable:
     """Count the number of times a page was accessed
     """
     @wraps(method)
-    def wrapper(url):
+    def wrapper(url: str) -> str:
         """Wraps the get how much times
         """
         key = "count:{}".format(url)
@@ -31,7 +30,7 @@ def count_calls(method: Callable) -> Callable:
 
 
 @count_calls
-def get_page(url):
+def get_page(url: str) -> str:
     """Returns a page by running get page
     """
     return requests.get(url).text
