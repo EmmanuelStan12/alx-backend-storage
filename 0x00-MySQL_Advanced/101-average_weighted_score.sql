@@ -4,8 +4,8 @@ DELIMITER $$
 CREATE PROCEDURE ComputeAverageWeightedScoreForUsers()
 compute_average:
 BEGIN
-  DECLARE total_weight INT DEFAULT 0;
-  DECLARE project_average INT DEFAULT 0;
+  DECLARE total_weight FLOAT DEFAULT 0;
+  DECLARE project_average FLOAT DEFAULT 0;
   DECLARE done INT DEFAULT FALSE;
   DECLARE user_id INT;
 
