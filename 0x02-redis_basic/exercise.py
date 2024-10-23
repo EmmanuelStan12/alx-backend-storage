@@ -26,8 +26,10 @@ def replay(fn: Callable) -> None:
     fn_inputs = store.lrange(inputs, 0, -1)
     fn_outputs = store.lrange(outputs, 0, -1)
     for input, output in zip(fn_inputs, fn_outputs):
-        print('{}(*{}) -> {}'.format(fn_name, input.decode('utf-8'), output.decode('utf-8')))
-
+        print('{}(*{}) -> {}'.format(
+            fn_name,
+            input.decode('utf-8'),
+            output.decode('utf-8')))
 
 
 def call_history(method: Callable) -> Callable:
@@ -81,7 +83,11 @@ class Cache:
         self._redis.set(key, data)
         return key
 
-    def get(self, key: str, fn: Callable = None) -> Union[str, bytes, int, float]:
+    def get(
+            self,
+            key: str,
+            fn: Callable = None
+    ) -> Union[str, bytes, int, float]:
         """Reading data from redis
         """
         data = self._redis.get(key)
@@ -96,4 +102,3 @@ class Cache:
         """Retrieves a string from redis store
         """
         return self.get(key, lambda x: x.decode('utf-8'))
-
