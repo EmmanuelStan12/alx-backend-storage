@@ -28,7 +28,7 @@ def count_calls(method: Callable) -> Callable:
             return result.decode('utf-8')
 
         result = method(*args, **kwargs)
-        store.set(f'count:{url}', 0)
+        store.set(f'count:{url}', 1)
         store.setex(f'result:{url}', 10, result)
         return result
     return wrapper
