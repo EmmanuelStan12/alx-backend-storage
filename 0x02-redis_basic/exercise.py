@@ -22,7 +22,7 @@ def replay(fn: Callable) -> None:
     if store.exists(fn_name) != 0:
         count = int(store.get(fn_name))
 
-    print('{} was called {} times'.format(fn_name, count))
+    print('{} was called {} times:'.format(fn_name, count))
     fn_inputs = store.lrange(inputs, 0, -1)
     fn_outputs = store.lrange(outputs, 0, -1)
     for input, output in zip(fn_inputs, fn_outputs):
